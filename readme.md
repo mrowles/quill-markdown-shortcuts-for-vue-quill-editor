@@ -1,8 +1,8 @@
 # Quill Markdown Shortcuts for vue-quill-editor
 
-This is a fork of Patrick Lee’s excellent [Markdown Shortcuts](https://github.com/patleeman/quill-markdown-shortcuts) module for [Quill.js](https://quilljs.com) that converts markdown on the fly to formatted rich text.
+This is a fork of Patrick Lee’s excellent [Markdown Shortcuts](https://github.com/patleeman/quill-markdown-shortcuts) module for [Quill.js](https://quilljs.com) that converts markdown on the fly to formatted rich text. The fork is optimised to work out of the box with [Vue.js](https://vuejs.org), [vue-quill-editor](https://github.com/surmon-china/vue-quill-editor), and [Nuxt](https://nuxtjs.org).
 
-I had to alter Patrick’s original code as I kept getting “Quill is undefined” errors in my app when trying to use it with Vue and vue-quill-editor in a Nuxt app. It’s stripped down (removed Webpack configuration, docs, etc.) and works out of the box with [vue-quill-editor](https://github.com/surmon-china/vue-quill-editor) and SSR via Nuxt (which is the setup I have for the app I’m using it in.)
+I had to alter Patrick’s original code as I kept getting “Quill is undefined” errors in my app when trying to use it with my above-mentioned setup. I was able to work around them by importing the classes directly and, within those, importing Quill, and exporting the main class via an ES6 module export. (That basically sums up the difference. Apart from that I’ve stripped everything that’s not explicitly necessary, including the Webpack config, etc.)
 
 For general purpose use, and for the canonical location for the original module and related materials, please see [Markdown Shortcuts](https://github.com/patleeman/quill-markdown-shortcuts)
 
