@@ -1,53 +1,82 @@
-# Quill Markdown Shortcuts
+# Quill Markdown Shortcuts for vue-quill-editor
 
-This package is a [Quill.js](https://quilljs.com) module that converts markdown on the fly to formatted rich text.
+This is a fork of Patrick Lee’s excellent [Markdown Shortcuts](https://github.com/patleeman/quill-markdown-shortcuts) module for [Quill.js](https://quilljs.com) that converts markdown on the fly to formatted rich text.
 
-[Example](https://patleeman.github.io/quill-markdown-shortcuts/)
+I had to alter Patrick’s original code as I kept getting “Quill is undefined” errors in my app when trying to use it with Vue and vue-quill-editor in a Nuxt app. It’s stripped down (removed Webpack configuration, docs, etc.) and works out of the box with [vue-quill-editor](https://github.com/surmon-china/vue-quill-editor) and SSR via Nuxt (which is the setup I have for the app I’m using it in.)
 
-# Quickstart
+For general purpose use, and for the canonical location for the original module and related materials, please see [Markdown Shortcuts](https://github.com/patleeman/quill-markdown-shortcuts)
 
-## Install using NPM
+# Using with vue-quill-editor in Nuxt
 
-Use the NPM package manager to add this dependency to your project, then in your html file, add a script tag to the end of the body and point to `markdownShortcuts.js` in the dist folder.
+1. `npm i vue-quill-editor github:aral/quill-markdown-shortcuts`
 
-```bash
-npm i -S quill-markdown-shortcuts
-```
+2. In the _plugins_ directory of your Nuxt app, create a _vue-quill-editor.js_ file and add the following code to it:
 
-```html
-<body>
-  <div class="container">
-    <div id="editor"></div>
-    <script src="/path/to/node_modules/quill-markdown-shortcuts/dist/markdownShortcuts.js"></script>
+   ```javascript
+    /* Client-side Quill Editor plugin with Markdown Shortcuts */
+    import Vue from 'vue'
+
+    import Quill from 'quill'
+    import VueQuillEditor from 'vue-quill-editor'
+
+    import 'quill/dist/quill.core.css'
+    import 'quill/dist/quill.snow.css'
+    import 'quill/dist/quill.bubble.css'
+
+    import MarkdownShortcuts from 'quill-markdown-shortcuts'
+    Quill.register('modules/markdownShortcuts', MarkdownShortcuts)
+
+    Vue.use(VueQuillEditor)
+   ```
+
+3. In your Nuxt configuration, make sure to disable SSR for vue-quill-editor:
+
+    ```javascript
+    module.exports = {
+      plugins: [
+        { src: '~plugins/vue-quill-editor', ssr: false }
+      ]
+    }
+    ```
+
+4. In your page (e.g., _index.vue_ under your _pages_ directory), instantiate the Quill component and specify the Markdown Shortcuts. Example:
+
+    ```html
+    <template>
+      <section>
+        <quill-editor
+          v-model='editorContent'
+          ref='textEditor'
+          :options='editorOption'
+        >
+        </quill-editor>
+      </section>
+    </template>
+
     <script>
-      var quill = new Quill('#editor', {
-        theme: 'snow',
-        // All you need to do to enable the module is to add a modules key
-        // to your quill configuration, and add markdownShortcuts with an
-        // empty object.
-        // There are currently no options to set.
-        modules: {
-          markdownShortcuts: {}
+      export default {
+        data () {
+          return {
+            editorContent: '',
+            editorOption: {
+              placeholder: 'What’s on your mind?',
+              theme: 'snow',
+              modules: {
+                markdownShortcuts: {},
+                toolbar: [
+                  [{ header: [1, 2, false] }],
+                  ['image', 'blockquote']
+                ]
+              }
+            }
+          }
         }
-      });
+      }
     </script>
-  </div>
-</body>
-```
-
-## Install using CDN
-
-Add the library via jsdelivr
-```
-<script src="https://cdn.jsdelivr.net/npm/quill-markdown-shortcuts@latest/dist/markdownShortcuts.js">
-```
-
-## Install by downloading file
-
-To incorporate the code into your codebase, simply download the markdownShortcuts.js file and include that in your build process or link a script tag to it directly. Then set up quill and make sure to include the markdownShortcuts setting in modules.
-
+    ```
 
 # Contributing
 
-Issues and pull requests are welcome. If you're interested in contributing, open an issue and start a discussion. To report bugs, open an issue. Bug fixes should be done on a fork and a pull request sent when ready.
+Unless they specifically concern this fork and the integration with Vue, Nuxt, and vue-quill-editor, please contribute directly to [Patrick’s original package](https://github.com/patleeman/quill-markdown-shortcuts). I’ll be updating this package with any improvements made upstream.
 
+Otherwise, issues and pull requests specifically concerning this fork are always welcome.
