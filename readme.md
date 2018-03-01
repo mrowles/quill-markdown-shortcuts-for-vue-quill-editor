@@ -8,7 +8,7 @@ For general purpose use, and for the canonical location for the original module 
 
 # Using with vue-quill-editor in Nuxt
 
-1. `npm i vue-quill-editor github:aral/quill-markdown-shortcuts`
+1. `npm i vue-quill-editor github:aral/quill-markdown-shortcuts-for-vue-quill-editor`
 
 2. In the _plugins_ directory of your Nuxt app, create a _vue-quill-editor.js_ file and add the following code to it:
 
