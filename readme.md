@@ -4,7 +4,7 @@ This is a fork of Patrick Lee’s excellent [Markdown Shortcuts](https://github.
 
 I had to alter Patrick’s original code as I kept getting “Quill is undefined” errors in my app when trying to use it with my above-mentioned setup. I was able to work around them by importing the classes directly and, within those, importing Quill, and exporting the main class via an ES6 module export. (That basically sums up the difference. Apart from that I’ve stripped everything that’s not explicitly necessary, including the Webpack config, etc.)
 
-For general purpose use, and for the canonical location for the original module and related materials, please see [Markdown Shortcuts](https://github.com/patleeman/quill-markdown-shortcuts)
+For general purpose use, and for the canonical location for the original module and related materials, please see [Markdown Shortcuts](https://github.com/patleeman/quill-markdown-shortcuts).
 
 # Using with vue-quill-editor in Nuxt
 
@@ -23,7 +23,7 @@ For general purpose use, and for the canonical location for the original module 
     import 'quill/dist/quill.snow.css'
     import 'quill/dist/quill.bubble.css'
 
-    import MarkdownShortcuts from 'quill-markdown-shortcuts'
+    import MarkdownShortcuts from 'quill-markdown-shortcuts-for-vue-quill-editor'
     Quill.register('modules/markdownShortcuts', MarkdownShortcuts)
 
     Vue.use(VueQuillEditor)
