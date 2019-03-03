@@ -252,7 +252,6 @@
          const matchedText = text.match(match.pattern)
          if (matchedText) {
            // We need to replace only matched text not the whole line
-           console.log('matched', match.name, text)
            match.action(text, selection, match.pattern, lineStart)
            return
          }
@@ -271,7 +270,6 @@
        for (let match of this.matches) {
          const matchedText = text.match(match.pattern)
          if (matchedText) {
-           console.log('matched', match.name, text)
            match.action(text, selection, match.pattern, lineStart)
            return
          }
@@ -281,4 +279,3 @@
  }
  
  export default MarkdownShortcuts
- 
